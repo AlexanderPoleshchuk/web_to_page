@@ -17,7 +17,6 @@ class List extends Component {
     render() {
         return (
             <Fragment>
-                <h2>Web generator</h2>
                 <table className='table table-striped'>
                     <thead>
                     <tr>
