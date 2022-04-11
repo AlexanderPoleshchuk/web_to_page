@@ -1,0 +1,74 @@
+version: '3.7'
+services:
+  db:
+    container_name: postgres
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    tty: true
+    stdin_open: true
+    container_name: web_generator
+    build: ./backend
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend/:/usr/src/backend/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./backend/enviroments/dev
+    depends_on:
+      - db
+
+  redis:
+    container_name: redis
+    image: "redis:alpine"
+    volumes:
+      - redis_data:/data
+    env_file:
+      - ./backend/enviroments/dev
+  
+  celery:
+    container_name: celery
+    build: ./backend
+    command: celery -A settings worker -l info
+    volumes:
+      - ./backend/:/usr/src/backend/
+    env_file:
+      - ./backend/enviroments/dev
+    depends_on:
+
+      - redis
+
+  flower:
+    build: ./backend
+    command: celery -A settings flower
+    volumes:
+      - ./backend/:/usr/src/backend/
+    ports:
+      - 5555:5555
+    env_file:
+      - ./backend/enviroments/dev
+    depends_on:
+      - celery
+      - redis
+
+
+  react-ui:
+    build: ./frontend
+    ports:
+      - 80:3000
+    container_name: react-ui
+    stdin_open: true
+    volumes:
+      - ./frontend/:/usr/src/frontend/
+      - /usr/src/frontend/node_modules
+
+
+volumes:
+  postgres_data:
+  redis_data:
