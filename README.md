@@ -59,6 +59,7 @@ http://localhost:3001
 ---
 #### After that, we receive an email with a link to download file:
 ![Screenshot from 2022-04-11 23-40-34](https://user-images.githubusercontent.com/53741871/162834905-3a5e313e-895f-45c2-abdb-c4f1077a4a6b.png)
+---
 ![Screenshot from 2022-04-12 00-19-01](https://user-images.githubusercontent.com/53741871/162835203-fb7a3233-cd70-44c9-a45b-ed4e32948a99.png)
 
 ---
@@ -73,4 +74,5 @@ http://localhost:3001
 ---
 #### And for tracking errors/bugs, we use Sentry for the Backend and Frontend:
 ![Screenshot from 2022-03-17 14-35-39](https://user-images.githubusercontent.com/53741871/162834998-d2215bb1-6218-4e79-9afa-46f0292ad64a.png)
+---
 ![Screenshot from 2022-03-17 14-36-07](https://user-images.githubusercontent.com/53741871/162835023-ec15161b-4314-47b3-8633-0973e97578ea.png)
